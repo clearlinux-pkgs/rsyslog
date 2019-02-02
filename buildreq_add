@@ -1,0 +1,29 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+
+#https://www.rsyslog.com/doc/master/installation/install_from_source.html
+docutils
+zlib
+zlib-dev
+json-c
+json-c-dev
+libgcrypt
+libgcrypt-dev
+util-linux
+util-linux-dev
+bison
+flex
+libtool
+iproute2
+
+#rsyslog-specific utilities
+liblogging
+liblogging-dev
+libfastjson
+libfastjson-dev
+libestr
+libestr-dev
+
+#libgcrypt may be missing the following dependencies
+libgpg-error
+libgpg-error-dev

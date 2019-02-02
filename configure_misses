@@ -1,0 +1,10 @@
+Configure miss: maxminddb.h usability
+Configure miss: maxminddb.h presence
+Configure miss: maxminddb.h
+Configure miss: hdfs.h usability
+Configure miss: hdfs.h presence
+Configure miss: hdfs.h
+Configure miss: hadoop/hdfs.h usability
+Configure miss: hadoop/hdfs.h presence
+Configure miss: hadoop/hdfs.h
+Configure miss: rst2man

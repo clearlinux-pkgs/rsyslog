@@ -1,0 +1,13 @@
+# This file contains pkgconfig build requirements that get picked up
+# but are undesirable. One entry per line, no whitespace.
+curl
+hiredis
+libczmq
+libksi
+liblogging-rfc3195
+libmaxminddb
+libmongoc-1.0
+libqpid-proton
+lognorm
+rdkafka
+relp
