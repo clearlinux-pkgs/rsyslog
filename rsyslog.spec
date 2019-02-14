@@ -4,7 +4,7 @@
 #
 Name     : rsyslog
 Version  : 8.1901.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/rsyslog/rsyslog/archive/v8.1901.0.tar.gz
 Source0  : https://github.com/rsyslog/rsyslog/archive/v8.1901.0.tar.gz
 Summary  : No detailed summary available
@@ -104,8 +104,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549068232
-%autogen --disable-static
+export SOURCE_DATE_EPOCH=1550109482
+%autogen --disable-static --enable-imjournal
 make  %{?_smp_mflags}
 
 %check
@@ -116,7 +116,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1549068232
+export SOURCE_DATE_EPOCH=1550109482
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
 cp COPYING %{buildroot}/usr/share/package-licenses/rsyslog/COPYING
@@ -137,6 +137,7 @@ cp contrib/omhiredis/COPYING_LESSER %{buildroot}/usr/share/package-licenses/rsys
 %defattr(-,root,root,-)
 /usr/lib64/rsyslog/fmhash.so
 /usr/lib64/rsyslog/fmhttp.so
+/usr/lib64/rsyslog/imjournal.so
 /usr/lib64/rsyslog/imklog.so
 /usr/lib64/rsyslog/immark.so
 /usr/lib64/rsyslog/imtcp.so
