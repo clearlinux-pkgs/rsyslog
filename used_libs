@@ -6,7 +6,6 @@ libfastjson.so.4
 libgcc_s.so.1
 libgcrypt.so.20
 libpthread.so.0
-librt.so.1
 libsystemd.so.0
 libuuid.so.1
 libz.so.1
