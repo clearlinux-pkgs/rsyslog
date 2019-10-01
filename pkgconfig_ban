@@ -9,5 +9,6 @@ libmaxminddb
 libmongoc-1.0
 libqpid-proton
 lognorm
+mysqlclient
 rdkafka
 relp
