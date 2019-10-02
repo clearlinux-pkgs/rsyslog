@@ -4,12 +4,12 @@
 #
 Name     : rsyslog
 Version  : 8.1910.0
-Release  : 8
+Release  : 9
 URL      : https://github.com/rsyslog/rsyslog/archive/v8.1910.0/rsyslog-8.1910.0.tar.gz
 Source0  : https://github.com/rsyslog/rsyslog/archive/v8.1910.0/rsyslog-8.1910.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : Apache-2.0 CDDL-1.1 GPL-3.0 LGPL-3.0
+License  : Apache-2.0 CDDL-1.0 GPL-3.0 LGPL-3.0
 Requires: rsyslog-bin = %{version}-%{release}
 Requires: rsyslog-lib = %{version}-%{release}
 Requires: rsyslog-license = %{version}-%{release}
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1569950836
+export SOURCE_DATE_EPOCH=1570046483
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -125,7 +125,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1569950836
+export SOURCE_DATE_EPOCH=1570046483
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
 cp COPYING %{buildroot}/usr/share/package-licenses/rsyslog/COPYING
