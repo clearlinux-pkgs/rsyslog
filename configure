@@ -1,1 +1,1 @@
---enable-imjournal
+--enable-imjournal --enable-omstdout

@@ -4,7 +4,7 @@
 #
 Name     : rsyslog
 Version  : 8.1910.0
-Release  : 9
+Release  : 10
 URL      : https://github.com/rsyslog/rsyslog/archive/v8.1910.0/rsyslog-8.1910.0.tar.gz
 Source0  : https://github.com/rsyslog/rsyslog/archive/v8.1910.0/rsyslog-8.1910.0.tar.gz
 Summary  : No detailed summary available
@@ -99,13 +99,14 @@ services components for the rsyslog package.
 
 %prep
 %setup -q -n rsyslog-8.1910.0
+cd %{_builddir}/rsyslog-8.1910.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570046483
+export SOURCE_DATE_EPOCH=1574370973
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -114,7 +115,7 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-%autogen --disable-static --enable-imjournal
+%autogen --disable-static --enable-imjournal --enable-omstdout
 make  %{?_smp_mflags}
 
 %check
@@ -125,15 +126,15 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1570046483
+export SOURCE_DATE_EPOCH=1574370973
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
-cp COPYING %{buildroot}/usr/share/package-licenses/rsyslog/COPYING
-cp COPYING.ASL20 %{buildroot}/usr/share/package-licenses/rsyslog/COPYING.ASL20
-cp COPYING.LESSER %{buildroot}/usr/share/package-licenses/rsyslog/COPYING.LESSER
-cp contrib/omhiredis/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/contrib_omhiredis_COPYING
-cp contrib/omhiredis/COPYING_LESSER %{buildroot}/usr/share/package-licenses/rsyslog/contrib_omhiredis_COPYING_LESSER
-cp solaris/cddllicense.txt %{buildroot}/usr/share/package-licenses/rsyslog/solaris_cddllicense.txt
+cp %{_builddir}/rsyslog-8.1910.0/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/654d5ed6dd2d6ab7904d4047cde6345730f9d174
+cp %{_builddir}/rsyslog-8.1910.0/COPYING.ASL20 %{buildroot}/usr/share/package-licenses/rsyslog/a0e4cbb52a11ad6dd1e4d27c0bd948eb2abc0188
+cp %{_builddir}/rsyslog-8.1910.0/COPYING.LESSER %{buildroot}/usr/share/package-licenses/rsyslog/1e2bf763a406378034f0722de926e819c31ed211
+cp %{_builddir}/rsyslog-8.1910.0/contrib/omhiredis/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/d2773a247962f107e65362fbb37d20cdf979d0ff
+cp %{_builddir}/rsyslog-8.1910.0/contrib/omhiredis/COPYING_LESSER %{buildroot}/usr/share/package-licenses/rsyslog/75b8e4445cd2df277d34b4ee6f5b1c06fca7cc91
+cp %{_builddir}/rsyslog-8.1910.0/solaris/cddllicense.txt %{buildroot}/usr/share/package-licenses/rsyslog/95df6148dd543173d4a3aedb646fc703e5bed82c
 %make_install
 
 %files
@@ -162,16 +163,17 @@ cp solaris/cddllicense.txt %{buildroot}/usr/share/package-licenses/rsyslog/solar
 /usr/lib64/rsyslog/lmtcpsrv.so
 /usr/lib64/rsyslog/lmzlibw.so
 /usr/lib64/rsyslog/mmexternal.so
+/usr/lib64/rsyslog/omstdout.so
 /usr/lib64/rsyslog/omtesting.so
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/rsyslog/COPYING
-/usr/share/package-licenses/rsyslog/COPYING.ASL20
-/usr/share/package-licenses/rsyslog/COPYING.LESSER
-/usr/share/package-licenses/rsyslog/contrib_omhiredis_COPYING
-/usr/share/package-licenses/rsyslog/contrib_omhiredis_COPYING_LESSER
-/usr/share/package-licenses/rsyslog/solaris_cddllicense.txt
+/usr/share/package-licenses/rsyslog/1e2bf763a406378034f0722de926e819c31ed211
+/usr/share/package-licenses/rsyslog/654d5ed6dd2d6ab7904d4047cde6345730f9d174
+/usr/share/package-licenses/rsyslog/75b8e4445cd2df277d34b4ee6f5b1c06fca7cc91
+/usr/share/package-licenses/rsyslog/95df6148dd543173d4a3aedb646fc703e5bed82c
+/usr/share/package-licenses/rsyslog/a0e4cbb52a11ad6dd1e4d27c0bd948eb2abc0188
+/usr/share/package-licenses/rsyslog/d2773a247962f107e65362fbb37d20cdf979d0ff
 
 %files man
 %defattr(0644,root,root,0755)
