@@ -4,10 +4,10 @@
 #
 Name     : rsyslog
 Version  : 8.2001.0
-Release  : 11
+Release  : 12
 URL      : https://github.com/rsyslog/rsyslog/archive/v8.2001.0/rsyslog-8.2001.0.tar.gz
 Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2001.0/rsyslog-8.2001.0.tar.gz
-Summary  : An enhanced multi-threaded syslogd with a focus on security and reliability
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0 CDDL-1.0 GPL-3.0 LGPL-3.0
 Requires: rsyslog-bin = %{version}-%{release}
@@ -15,9 +15,7 @@ Requires: rsyslog-lib = %{version}-%{release}
 Requires: rsyslog-license = %{version}-%{release}
 Requires: rsyslog-man = %{version}-%{release}
 Requires: rsyslog-services = %{version}-%{release}
-BuildRequires : apache-maven
 BuildRequires : bison
-BuildRequires : buildreq-mvn
 BuildRequires : docutils
 BuildRequires : flex
 BuildRequires : iproute2
@@ -53,10 +51,7 @@ BuildRequires : zlib
 BuildRequires : zlib-dev
 
 %description
-# Rsyslog - MMDBLookup
-Fast geoip lookups straight from Rsyslog.
-[Maxmind](https://www.maxmind.com/en/home) provides free and pay-for memory mapped ip-lookup databases.
-The free city-level database is about 22 mB, and can be found on the [geolite page](http://dev.maxmind.com/geoip/geoip2/geolite2/).
+
 
 %package bin
 Summary: bin components for the rsyslog package.
@@ -110,8 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1579197453
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1582331720
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -131,7 +125,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1579197453
+export SOURCE_DATE_EPOCH=1582331720
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
 cp %{_builddir}/rsyslog-8.2001.0/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/654d5ed6dd2d6ab7904d4047cde6345730f9d174
