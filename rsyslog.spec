@@ -4,10 +4,10 @@
 #
 Name     : rsyslog
 Version  : 8.2002.0
-Release  : 14
+Release  : 15
 URL      : https://github.com/rsyslog/rsyslog/archive/v8.2002.0/rsyslog-8.2002.0.tar.gz
 Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2002.0/rsyslog-8.2002.0.tar.gz
-Summary  : No detailed summary available
+Summary  : An enhanced multi-threaded syslogd with a focus on security and reliability
 Group    : Development/Tools
 License  : Apache-2.0 CDDL-1.0 GPL-3.0 LGPL-3.0
 Requires: rsyslog-bin = %{version}-%{release}
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582843602
+export SOURCE_DATE_EPOCH=1582846504
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -114,8 +114,15 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-%autogen --disable-static --enable-imjournal \
+%autogen --disable-static --enable-gnutls \
+--enable-imfile \
+--enable-imjournal \
+--enable-impstats \
+--enable-imptcp \
+--enable-inet \
+--enable-mail \
 --enable-omjournal \
+--enable-omprog \
 --enable-omstdout
 make  %{?_smp_mflags}
 
@@ -127,7 +134,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1582843602
+export SOURCE_DATE_EPOCH=1582846504
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
 cp %{_builddir}/rsyslog-8.2002.0/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/654d5ed6dd2d6ab7904d4047cde6345730f9d174
@@ -149,15 +156,19 @@ cp %{_builddir}/rsyslog-8.2002.0/solaris/cddllicense.txt %{buildroot}/usr/share/
 %defattr(-,root,root,-)
 /usr/lib64/rsyslog/fmhash.so
 /usr/lib64/rsyslog/fmhttp.so
+/usr/lib64/rsyslog/imfile.so
 /usr/lib64/rsyslog/imjournal.so
 /usr/lib64/rsyslog/imklog.so
 /usr/lib64/rsyslog/immark.so
+/usr/lib64/rsyslog/impstats.so
+/usr/lib64/rsyslog/imptcp.so
 /usr/lib64/rsyslog/imtcp.so
 /usr/lib64/rsyslog/imudp.so
 /usr/lib64/rsyslog/imuxsock.so
 /usr/lib64/rsyslog/lmcry_gcry.so
 /usr/lib64/rsyslog/lmnet.so
 /usr/lib64/rsyslog/lmnetstrms.so
+/usr/lib64/rsyslog/lmnsd_gtls.so
 /usr/lib64/rsyslog/lmnsd_ptcp.so
 /usr/lib64/rsyslog/lmregexp.so
 /usr/lib64/rsyslog/lmtcpclt.so
@@ -165,6 +176,8 @@ cp %{_builddir}/rsyslog-8.2002.0/solaris/cddllicense.txt %{buildroot}/usr/share/
 /usr/lib64/rsyslog/lmzlibw.so
 /usr/lib64/rsyslog/mmexternal.so
 /usr/lib64/rsyslog/omjournal.so
+/usr/lib64/rsyslog/ommail.so
+/usr/lib64/rsyslog/omprog.so
 /usr/lib64/rsyslog/omstdout.so
 /usr/lib64/rsyslog/omtesting.so
 

@@ -1,9 +1,12 @@
+Configure miss: gnutls_certificate_type_set_priority
 Configure miss: maxminddb.h usability
 Configure miss: maxminddb.h presence
 Configure miss: maxminddb.h
 Configure miss: protocol.h usability
 Configure miss: protocol.h presence
 Configure miss: protocol.h
+Configure miss: port_create
+Configure miss: Solaris File Events Notification API support
 Configure miss: hdfs.h usability
 Configure miss: hdfs.h presence
 Configure miss: hdfs.h

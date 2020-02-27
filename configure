@@ -1,3 +1,10 @@
+--enable-gnutls
+--enable-imfile
 --enable-imjournal
+--enable-impstats
+--enable-imptcp
+--enable-inet
+--enable-mail
 --enable-omjournal
+--enable-omprog
 --enable-omstdout
