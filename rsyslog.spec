@@ -4,10 +4,10 @@
 #
 Name     : rsyslog
 Version  : 8.2002.0
-Release  : 13
+Release  : 14
 URL      : https://github.com/rsyslog/rsyslog/archive/v8.2002.0/rsyslog-8.2002.0.tar.gz
 Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2002.0/rsyslog-8.2002.0.tar.gz
-Summary  : An enhanced multi-threaded syslogd with a focus on security and reliability
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0 CDDL-1.0 GPL-3.0 LGPL-3.0
 Requires: rsyslog-bin = %{version}-%{release}
@@ -51,10 +51,7 @@ BuildRequires : zlib
 BuildRequires : zlib-dev
 
 %description
-# Rsyslog - MMDBLookup
-Fast geoip lookups straight from Rsyslog.
-[Maxmind](https://www.maxmind.com/en/home) provides free and pay-for memory mapped ip-lookup databases.
-The free city-level database is about 22 mB, and can be found on the [geolite page](http://dev.maxmind.com/geoip/geoip2/geolite2/).
+
 
 %package bin
 Summary: bin components for the rsyslog package.
@@ -108,8 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582746342
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1582843602
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -118,7 +114,9 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-%autogen --disable-static --enable-imjournal --enable-omstdout
+%autogen --disable-static --enable-imjournal \
+--enable-omjournal \
+--enable-omstdout
 make  %{?_smp_mflags}
 
 %check
@@ -129,7 +127,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1582746342
+export SOURCE_DATE_EPOCH=1582843602
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
 cp %{_builddir}/rsyslog-8.2002.0/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/654d5ed6dd2d6ab7904d4047cde6345730f9d174
@@ -166,6 +164,7 @@ cp %{_builddir}/rsyslog-8.2002.0/solaris/cddllicense.txt %{buildroot}/usr/share/
 /usr/lib64/rsyslog/lmtcpsrv.so
 /usr/lib64/rsyslog/lmzlibw.so
 /usr/lib64/rsyslog/mmexternal.so
+/usr/lib64/rsyslog/omjournal.so
 /usr/lib64/rsyslog/omstdout.so
 /usr/lib64/rsyslog/omtesting.so
 
