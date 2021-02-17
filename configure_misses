@@ -1,12 +1,8 @@
+Configure miss: library containing yywrap
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gnutls_certificate_type_set_priority
-Configure miss: protocol.h usability
-Configure miss: protocol.h presence
 Configure miss: protocol.h
 Configure miss: port_create
 Configure miss: Solaris File Events Notification API support
-Configure miss: hdfs.h usability
-Configure miss: hdfs.h presence
 Configure miss: hdfs.h
-Configure miss: hadoop/hdfs.h usability
-Configure miss: hadoop/hdfs.h presence
 Configure miss: hadoop/hdfs.h
