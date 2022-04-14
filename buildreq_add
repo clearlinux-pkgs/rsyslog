@@ -2,7 +2,7 @@
 # picked up automatically. One name per line, no whitespace.
 
 #https://www.rsyslog.com/doc/master/installation/install_from_source.html
-docutils
+pypi-docutils
 zlib
 zlib-dev
 json-c

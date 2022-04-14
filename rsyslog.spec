@@ -4,7 +4,7 @@
 #
 Name     : rsyslog
 Version  : 8.2202.0
-Release  : 27
+Release  : 28
 URL      : https://github.com/rsyslog/rsyslog/archive/v8.2202.0/rsyslog-8.2202.0.tar.gz
 Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2202.0/rsyslog-8.2202.0.tar.gz
 Summary  : An enhanced multi-threaded syslogd with a focus on security and reliability
@@ -15,7 +15,6 @@ Requires: rsyslog-lib = %{version}-%{release}
 Requires: rsyslog-license = %{version}-%{release}
 Requires: rsyslog-man = %{version}-%{release}
 BuildRequires : bison
-BuildRequires : docutils
 BuildRequires : flex
 BuildRequires : iproute2
 BuildRequires : json-c
@@ -45,6 +44,7 @@ BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(openssl)
 BuildRequires : pkgconfig(uuid)
 BuildRequires : pkgconfig(zlib)
+BuildRequires : pypi-docutils
 BuildRequires : util-linux
 BuildRequires : util-linux-dev
 BuildRequires : valgrind
@@ -97,7 +97,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1645047402
+export SOURCE_DATE_EPOCH=1649966289
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -126,7 +126,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1645047402
+export SOURCE_DATE_EPOCH=1649966289
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
 cp %{_builddir}/rsyslog-8.2202.0/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/654d5ed6dd2d6ab7904d4047cde6345730f9d174
