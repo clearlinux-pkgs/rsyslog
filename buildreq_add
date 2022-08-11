@@ -27,3 +27,4 @@ libestr-dev
 #libgcrypt may be missing the following dependencies
 libgpg-error
 libgpg-error-dev
+zstd-dev

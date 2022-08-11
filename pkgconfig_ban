@@ -12,3 +12,4 @@ lognorm
 mysqlclient
 rdkafka
 relp
+zstd
