@@ -4,7 +4,7 @@
 #
 Name     : rsyslog
 Version  : 8.2208.0
-Release  : 32
+Release  : 33
 URL      : https://github.com/rsyslog/rsyslog/archive/v8.2208.0/rsyslog-8.2208.0.tar.gz
 Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2208.0/rsyslog-8.2208.0.tar.gz
 Summary  : An enhanced multi-threaded syslogd with a focus on security and reliability
