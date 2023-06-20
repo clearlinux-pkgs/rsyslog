@@ -4,10 +4,10 @@
 # Using build pattern: autogen
 #
 Name     : rsyslog
-Version  : 8.2304.0
-Release  : 37
-URL      : https://github.com/rsyslog/rsyslog/archive/v8.2304.0/rsyslog-8.2304.0.tar.gz
-Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2304.0/rsyslog-8.2304.0.tar.gz
+Version  : 8.2306.0
+Release  : 38
+URL      : https://github.com/rsyslog/rsyslog/archive/v8.2306.0/rsyslog-8.2306.0.tar.gz
+Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2306.0/rsyslog-8.2306.0.tar.gz
 Summary  : An enhanced multi-threaded syslogd with a focus on security and reliability
 Group    : Development/Tools
 License  : Apache-2.0 CDDL-1.0 GPL-3.0 LGPL-3.0
@@ -95,23 +95,26 @@ man components for the rsyslog package.
 
 
 %prep
-%setup -q -n rsyslog-8.2304.0
-cd %{_builddir}/rsyslog-8.2304.0
+%setup -q -n rsyslog-8.2306.0
+cd %{_builddir}/rsyslog-8.2306.0
+pushd ..
+cp -a rsyslog-8.2306.0 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681751835
+export SOURCE_DATE_EPOCH=1687276941
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 %autogen --disable-static --enable-gnutls \
 --enable-imfile \
 --enable-imjournal \
@@ -124,15 +127,35 @@ export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonl
 --enable-omstdout
 make  %{?_smp_mflags}
 
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+%autogen --disable-static --enable-gnutls \
+--enable-imfile \
+--enable-imjournal \
+--enable-impstats \
+--enable-imptcp \
+--enable-inet \
+--enable-mail \
+--enable-omjournal \
+--enable-omprog \
+--enable-omstdout
+make  %{?_smp_mflags}
+popd
 %check
 export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
+cd ../buildavx2;
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1681751835
+export SOURCE_DATE_EPOCH=1687276941
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
 cp %{_builddir}/rsyslog-%{version}/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/654d5ed6dd2d6ab7904d4047cde6345730f9d174 || :
@@ -143,17 +166,48 @@ cp %{_builddir}/rsyslog-%{version}/contrib/imhiredis/COPYING_LESSER %{buildroot}
 cp %{_builddir}/rsyslog-%{version}/contrib/omhiredis/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/d2773a247962f107e65362fbb37d20cdf979d0ff || :
 cp %{_builddir}/rsyslog-%{version}/contrib/omhiredis/COPYING_LESSER %{buildroot}/usr/share/package-licenses/rsyslog/75b8e4445cd2df277d34b4ee6f5b1c06fca7cc91 || :
 cp %{_builddir}/rsyslog-%{version}/solaris/cddllicense.txt %{buildroot}/usr/share/package-licenses/rsyslog/95df6148dd543173d4a3aedb646fc703e5bed82c || :
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/rsyslogd
 /usr/bin/rsyslogd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/rsyslog/fmhash.so
+/V3/usr/lib64/rsyslog/fmhttp.so
+/V3/usr/lib64/rsyslog/imfile.so
+/V3/usr/lib64/rsyslog/imjournal.so
+/V3/usr/lib64/rsyslog/imklog.so
+/V3/usr/lib64/rsyslog/immark.so
+/V3/usr/lib64/rsyslog/impstats.so
+/V3/usr/lib64/rsyslog/imptcp.so
+/V3/usr/lib64/rsyslog/imtcp.so
+/V3/usr/lib64/rsyslog/imudp.so
+/V3/usr/lib64/rsyslog/imuxsock.so
+/V3/usr/lib64/rsyslog/lmcry_gcry.so
+/V3/usr/lib64/rsyslog/lmnet.so
+/V3/usr/lib64/rsyslog/lmnetstrms.so
+/V3/usr/lib64/rsyslog/lmnsd_gtls.so
+/V3/usr/lib64/rsyslog/lmnsd_ptcp.so
+/V3/usr/lib64/rsyslog/lmregexp.so
+/V3/usr/lib64/rsyslog/lmtcpclt.so
+/V3/usr/lib64/rsyslog/lmtcpsrv.so
+/V3/usr/lib64/rsyslog/lmzlibw.so
+/V3/usr/lib64/rsyslog/mmexternal.so
+/V3/usr/lib64/rsyslog/omjournal.so
+/V3/usr/lib64/rsyslog/ommail.so
+/V3/usr/lib64/rsyslog/omprog.so
+/V3/usr/lib64/rsyslog/omstdout.so
+/V3/usr/lib64/rsyslog/omtesting.so
 /usr/lib64/rsyslog/fmhash.so
 /usr/lib64/rsyslog/fmhttp.so
 /usr/lib64/rsyslog/imfile.so
