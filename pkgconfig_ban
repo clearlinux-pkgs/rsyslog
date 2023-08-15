@@ -13,3 +13,4 @@ mysqlclient
 rdkafka
 relp
 zstd
+libqpid-proton-proactor

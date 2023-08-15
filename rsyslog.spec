@@ -4,10 +4,10 @@
 # Using build pattern: autogen
 #
 Name     : rsyslog
-Version  : 8.2306.0
-Release  : 38
-URL      : https://github.com/rsyslog/rsyslog/archive/v8.2306.0/rsyslog-8.2306.0.tar.gz
-Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2306.0/rsyslog-8.2306.0.tar.gz
+Version  : 8.2308.0
+Release  : 39
+URL      : https://github.com/rsyslog/rsyslog/archive/v8.2308.0/rsyslog-8.2308.0.tar.gz
+Source0  : https://github.com/rsyslog/rsyslog/archive/v8.2308.0/rsyslog-8.2308.0.tar.gz
 Summary  : An enhanced multi-threaded syslogd with a focus on security and reliability
 Group    : Development/Tools
 License  : Apache-2.0 CDDL-1.0 GPL-3.0 LGPL-3.0
@@ -95,10 +95,10 @@ man components for the rsyslog package.
 
 
 %prep
-%setup -q -n rsyslog-8.2306.0
-cd %{_builddir}/rsyslog-8.2306.0
+%setup -q -n rsyslog-8.2308.0
+cd %{_builddir}/rsyslog-8.2308.0
 pushd ..
-cp -a rsyslog-8.2306.0 buildavx2
+cp -a rsyslog-8.2308.0 buildavx2
 popd
 
 %build
@@ -106,7 +106,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1687276941
+export SOURCE_DATE_EPOCH=1692121583
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -155,7 +155,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1687276941
+export SOURCE_DATE_EPOCH=1692121583
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/rsyslog
 cp %{_builddir}/rsyslog-%{version}/COPYING %{buildroot}/usr/share/package-licenses/rsyslog/654d5ed6dd2d6ab7904d4047cde6345730f9d174 || :
