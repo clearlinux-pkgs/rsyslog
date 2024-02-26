@@ -1,5 +1,7 @@
 Configure miss: Solaris File Events Notification API support
 Configure miss: Solaris File Events Notification API support
+Configure miss: gcc option to enable large file support
+Configure miss: gcc option to enable large file support
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gnutls_certificate_type_set_priority
