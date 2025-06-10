@@ -1,8 +1,11 @@
 libc.so.6
 libcurl.so.4
+libestr.so.0
 libfastjson.so.4
 libgcc_s.so.1
 libgcrypt.so.20
 libgnutls.so.30
+libm.so.6
 libsystemd.so.0
+libuuid.so.1
 libz.so.1
